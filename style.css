@@ -37,6 +37,10 @@ table, th, tr{
     border-collapse: collapse;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .header__img {
     padding-right: 16px;
 }
