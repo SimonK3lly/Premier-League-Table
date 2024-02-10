@@ -59,20 +59,21 @@ function addHTML(tableData) {
 
 
 function sortColumn(columnName) {
-const dataType = typeof tableData[0][columnName];
+    const isNumeric = !isNaN(tableData[0].stats[columnName]); // Check if the property is numeric
     sortDirection = !sortDirection;
 
-    switch(dataType) {
-        case 'string':
-        sortTextColumn(sortDirection, columnName);
-        break;
-    }
-    addHTML(tableData)
+    tableData.sort((a, b) => {
+        const valueA = isNumeric ? a.stats[columnName] : a.stats[columnName].toString().toLowerCase();
+        const valueB = isNumeric ? b.stats[columnName] : b.stats[columnName].toString().toLowerCase();
+
+        if (sortDirection) {
+            return isNumeric ? valueA - valueB : valueA.localeCompare(valueB);
+        } else {
+            return isNumeric ? valueB - valueA : valueB.localeCompare(valueA);
+        }
+    });
+
+    addHTML(tableData);
 }
 
-function sortTextColumn(sort, columnName) {
-    tableData = tableData.sort((p1, p2) => {
-        return sort ? p1[columnName] - p2[columnName] : p2[columnName] - p1[columnName]
-    })
-}
 
