@@ -66,6 +66,8 @@ thead {
 
 .team__name-logo {
     padding: 2px;
+    width: 100%;
+    max-width: 40px;
 }
 
 .team__name-text {
